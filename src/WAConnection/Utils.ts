@@ -230,9 +230,9 @@ export const mediaMessageSHA256B64 = (message: WAMessageContent) => {
     const media = Object.values(message)[0] as WAGenericMediaMessage
     return media?.fileSha256 && Buffer.from(media.fileSha256).toString ('base64')
 }
-export async function getAudioDuration (buffer: Buffer) {
+export async function getAudioDuration (buffer: Buffer, mimeType: string) {
     const musicMetadata = await import ('music-metadata')
-    const metadata = await musicMetadata.parseBuffer (buffer, null, {duration: true});
+    const metadata = await musicMetadata.parseBuffer (buffer, {mimeType: mimeType}, {duration: true});
     return metadata.format.duration;
 }
 

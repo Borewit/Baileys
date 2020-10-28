@@ -120,7 +120,7 @@ export class WAConnection extends Base {
         await generateThumbnail(buffer, mediaType, options)
         if (mediaType === MessageType.audio && !options.duration) {
             try {
-                options.duration = await getAudioDuration (buffer)
+                options.duration = await getAudioDuration (buffer, options.mimetype)
             } catch (error) {
                 this.logger.debug ({ error }, 'failed to obtain audio duration: ' + error.message)
             }
